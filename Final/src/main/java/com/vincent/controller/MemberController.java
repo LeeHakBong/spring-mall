@@ -135,10 +135,6 @@ public class MemberController {
 	    @RequestMapping(value="login", method=RequestMethod.POST)
 	    public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
 	        
-	    	  System.out.println("login 메서드 진입");
-		        System.out.println("전달된 데이터 : " + member);
-		       
-	    	
 	    	HttpSession session = request.getSession();
 	    	String rawPw = "";
 	        String encodePw = "";
@@ -155,9 +151,7 @@ public class MemberController {
 	                
 	                lvo.setMemberPw("");                    // 인코딩된 비밀번호 정보 지움
 	                session.setAttribute("member", lvo);    // session에 사용자의 정보 저장
-	                System.out.println(member);
-	                System.out.println(lvo);
-	           
+	              
 	                return "redirect:/main";        // 메인페이지 이동
 	                
 	                
@@ -187,5 +181,16 @@ public class MemberController {
 	         
 	         return "redirect:/main";     
 	    	
+	    }
+	    
+	    /* 비동기방식 로그아웃 메서드 */
+	    @RequestMapping(value="logout.do", method=RequestMethod.POST)
+	    @ResponseBody
+	    public void logoutPOST(HttpServletRequest request) throws Exception{
+	        
+	        HttpSession session = request.getSession();
+	        
+	        session.invalidate();
+	        
 	    }
 }

@@ -2,12 +2,17 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>          
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>XC-CORP.</title>
 <link rel="stylesheet" href="resources/css/main.css">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -29,7 +34,7 @@
                     </c:if>
                     
                     <li>
-                        로그아웃
+                       <a id="gnb_logout_button">로그아웃</a>
                     </li>
                     <li>
                         마이룸
@@ -79,6 +84,21 @@
 		</div>
 	</div>
 </div>
-
+<script>
+ 
+    /* gnb_area 로그아웃 버튼 작동 */
+    $("#gnb_logout_button").click(function(){
+        
+        $.ajax({
+            type:"POST",
+            url:"/member/logout.do",
+            success:function(data){
+                alert("정상적으로 로그아웃 되었습니다.");
+                document.location.reload();     
+            } 
+        }); // ajax 
+    });
+    
+</script>
 </body>
 </html>
